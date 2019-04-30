@@ -61,6 +61,7 @@ public class MailPool implements IMailPool {
 		try{
 			ListIterator<Robot> i = robots.listIterator();
 			while (i.hasNext()) loadRobot(i);
+//			System.out.println(getRobotNumber());
 		} catch (Exception e) { 
             throw e; 
         } 
@@ -85,6 +86,10 @@ public class MailPool implements IMailPool {
 	            throw e; 
 	        } 
 		}
+	}
+	
+	public int getRobotNumber() {
+		return robots.size();
 	}
 
 	@Override
