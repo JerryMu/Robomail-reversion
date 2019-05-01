@@ -18,7 +18,7 @@ public class Robot {
     IMailDelivery delivery;
     protected final String id;
     /** Possible states the robot can be in */
-    public enum RobotState { DELIVERING, WAITING, RETURNING  }
+    public enum RobotState { DELIVERING, WAITING, RETURNING, COOPERATION, WAITINGFORCOOP  }
     public RobotState current_state;
     private int current_floor;
     private int destination_floor;
@@ -52,6 +52,8 @@ public class Robot {
     public void dispatch() {
     	receivedDispatch = true;
     }
+    
+ 
 
     /**
      * This is called on every time step
@@ -175,6 +177,14 @@ public class Robot {
 		assert(deliveryItem == null);
 		deliveryItem = mailItem;
 		if (deliveryItem.weight > INDIVIDUAL_MAX_WEIGHT) throw new ItemTooHeavyException();
+	}
+	
+	public void addToHand(MailItem mailItem, int robotNumber) throws ItemTooHeavyException {
+		assert(deliveryItem == null);
+		deliveryItem = mailItem;
+		if (robotNumber == 2 && deliveryItem.weight > PAIR_MAX_WEIGHT) throw new ItemTooHeavyException();
+		else if (deliveryItem.weight > TRIPLE_MAX_WEIGHT) throw new ItemTooHeavyException();
+
 	}
 
 	public void addToTube(MailItem mailItem) throws ItemTooHeavyException {
