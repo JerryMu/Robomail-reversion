@@ -112,7 +112,16 @@ public class Robot {
 	                moveTowards(destination_floor);
     			}
                 break;
-    		case WAITINGFORCOOPERATION:
+//    		case WAITINGFORCOOPERATION:
+//    			//really waiting
+//    			if(current_floor == Building.MAILROOM_LOCATION){
+//    				
+//    			}else {
+//                	/** If the robot is not at the mailroom floor yet, then move towards it! */
+//                    moveTowards(Building.MAILROOM_LOCATION);
+//                	break;
+//                }
+    			
     			
     			
     			

@@ -72,19 +72,26 @@ public class MailPool implements IMailPool {
 		assert(robot.isEmpty());
 		// System.out.printf("P: %3d%n", pool.size());
 		ListIterator<Item> j = pool.listIterator();
+		MailItem temp_item;
 		if (pool.size() > 0) {
-			try {
-			robot.addToHand(j.next().mailItem); // hand first as we want higher priority delivered first
-			j.remove();
-			if (pool.size() > 0) {
-				robot.addToTube(j.next().mailItem);
+			temp_item = j.next().mailItem;
+			if(temp_item.getWeight() <= Robot.INDIVIDUAL_MAX_WEIGHT) {
+				try {
+				robot.addToHand(temp_item); // hand first as we want higher priority delivered first
 				j.remove();
+				if(pool.size() > 0) {
+					temp_item = j.next().mailItem;
+					if (temp_item.getWeight() <= Robot.INDIVIDUAL_MAX_WEIGHT) {
+						robot.addToTube(temp_item);
+						j.remove();
+					}
+				}
+				robot.dispatch(); // send the robot off if it has any items to deliver
+				i.remove();       // remove from mailPool queue
+				} catch (Exception e) { 
+		            throw e; 
+		        } 
 			}
-			robot.dispatch(); // send the robot off if it has any items to deliver
-			i.remove();       // remove from mailPool queue
-			} catch (Exception e) { 
-	            throw e; 
-	        } 
 		}
 	}
 	
