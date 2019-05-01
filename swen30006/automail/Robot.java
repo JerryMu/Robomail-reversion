@@ -18,7 +18,7 @@ public class Robot {
     IMailDelivery delivery;
     protected final String id;
     /** Possible states the robot can be in */
-    public enum RobotState { DELIVERING, WAITING, RETURNING, COOPERATION, WAITINGFORCOOP  }
+    public enum RobotState { DELIVERING, WAITING, RETURNING, COORPERATION, WAITINGFORCOOPERATION  }
     public RobotState current_state;
     private int current_floor;
     private int destination_floor;
@@ -112,6 +112,10 @@ public class Robot {
 	                moveTowards(destination_floor);
     			}
                 break;
+    		case WAITINGFORCOOPERATION:
+    			
+    			
+    			
     	}
     }
 
